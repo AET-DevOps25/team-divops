@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application.name: gateway
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${GATEWAY_DB_URL}
+    username: ${GATEWAY_DB_USERNAME}
+    password: ${GATEWAY_DB_PASSWORD}
+
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  threads.virtual.enabled: true
+  flyway:
+    enabled: false
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration-ms: ${JWT_EXPIRATION_MS:3600000}
+
+user-service:
+  base-url: http://user-service:8080
